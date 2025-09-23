@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /reset-password
+
+# Host
+Host: https://Arionys.com
+
+# Sitemaps
+Sitemap: https://Arionys.com/sitemap.xml 
