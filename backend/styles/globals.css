@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 * {
     margin: 0;
     padding: 0;
@@ -1383,4 +1382,5 @@ button {
         box-shadow: 0 -8px #076fe5;
         height: 40px;
     }
+
 }

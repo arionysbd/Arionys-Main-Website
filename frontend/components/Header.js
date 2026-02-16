@@ -79,7 +79,7 @@ export default function Header() {
     }
 
     // darkMode on off
-    const [darkMode, setDarkMode] = useState(true);
+    const [darkMode, setDarkMode] = useState(false);
 
     useEffect(() => {
         // Check local storage for dark mode preference on initial load
@@ -276,6 +276,19 @@ export default function Header() {
                                         &nbsp;Arionys Diary
                                     </Link>
                                 </li>
+                                <li className="w-full">
+                                    <Link
+                                        href='/apps/qrcode'
+                                        className='hover:text-[#007bff] text-gray-600 dark:text-gray-300 font-semibold text-[15px] flex items-center'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <rect x="3" y="3" width="7" height="7"></rect>
+                                            <rect x="14" y="3" width="7" height="7"></rect>
+                                            <rect x="14" y="14" width="7" height="7"></rect>
+                                            <path d="M3 14h7v7H3z" />
+                                        </svg>
+                                        &nbsp;QR Code Generator
+                                    </Link>
+                                </li>
                             </ul>
                         </li>
 
@@ -416,6 +429,7 @@ export default function Header() {
                                 <li><Link className={`font-semibold text-[15px] text-gray-600 dark:text-gray-300 ${activeLink === 'https://invoice.Arionys.com/' ? 'text-[#5485e0]' : ''}`} href="https://invoice.Arionys.com/">Arionys Invoicer</Link></li>
                                 <li><Link className={`font-semibold text-[15px] text-gray-600 dark:text-gray-300 ${activeLink === '/apps/shorturl' ? 'text-[#5485e0]' : ''}`} href="/apps/shorturl">URL Shortener</Link></li>
                                 <li><Link className={`font-semibold text-[15px] text-gray-600 dark:text-gray-300 ${activeLink === '/privatenote/diary' ? 'text-[#5485e0]' : ''}`} href="/privatenote/diary">Diary</Link></li>
+                                <li><Link className={`font-semibold text-[15px] text-gray-600 dark:text-gray-300 ${activeLink === '/apps/qrcode' ? 'text-[#5485e0]' : ''}`} href="/apps/qrcode">QR Code Generator</Link></li>
                             </ul>
                         )}
                     </li>

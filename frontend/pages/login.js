@@ -82,7 +82,8 @@ const login = ({ csrfToken }) => {
 
             await router.push('/dashboard');
             router.reload()
-        } catch {
+        } catch (err) {
+            const errorMessage = err.response?.data?.message || "Invalid Credentials!";
             const Toast = Swal.mixin({
                 toast: true,
                 position: "top-end",
@@ -96,7 +97,7 @@ const login = ({ csrfToken }) => {
             });
             Toast.fire({
                 icon: "error",
-                title: "Invalid Credentials!"
+                title: errorMessage
             });
             return
         }
@@ -167,7 +168,7 @@ const login = ({ csrfToken }) => {
                             <form onSubmit={userLogin}>
                                 {/* <form method="post" action={`${process.env.SITE_URL}/api/auth/callback/credentials`}> */}
                                 {/* <form method="post" action={userAuthLogin}> */}
-                                <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+                                <input name="csrfToken" type="hidden" defaultValue={csrfToken ?? ''} />
                                 <div className="flex -mx-3">
                                     <div className="w-full px-3 mb-5">
                                         <label htmlFor="" className="text-xs font-semibold px-1 dark:text-gray-300">Email*</label>
@@ -210,9 +211,10 @@ export default login
 
 
 export async function getServerSideProps(context) {
-    return {
-        props: {
-            csrfToken: await getCsrfToken(context),
-        },
-    };
+    try {
+        const token = await getCsrfToken(context);
+        return { props: { csrfToken: token ?? null } };
+    } catch {
+        return { props: { csrfToken: null } };
+    }
 }

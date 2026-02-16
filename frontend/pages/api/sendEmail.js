@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+// import nodemailer from 'nodemailer';
 
 export default async function sendEmail(req, res) {
     const { method } = req;
@@ -250,34 +250,77 @@ export default async function sendEmail(req, res) {
 
 </html>`;
         const otpTemp = `<!DOCTYPE html>
-<html lang="en">
-    <body>
-        <header>
-            <h1>Your OTP is: ${otp}</h1>
-        </header>
-    </body>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your OTP Code</title>
+  <style>
+    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+    .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-top: 40px; margin-bottom: 40px; }
+    .header { background-color: #21252b; padding: 30px; text-align: center; }
+    .header h1 { color: #ffffff; margin: 0; font-size: 24px; font-weight: 600; }
+    .content { padding: 40px; text-align: center; color: #333333; }
+    .otp-code { font-size: 36px; font-weight: bold; color: #7747FF; letter-spacing: 5px; margin: 20px 0; padding: 15px; background-color: #f8f9fa; border-radius: 4px; display: inline-block; }
+    .message { font-size: 16px; line-height: 1.6; margin-bottom: 20px; }
+    .footer { background-color: #f8f9fa; padding: 20px; text-align: center; font-size: 12px; color: #888888; border-top: 1px solid #eeeeee; }
+    .warning { color: #e74c3c; font-size: 14px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Arionys Verification</h1>
+    </div>
+    <div class="content">
+      <p class="message">Hello,</p>
+      <p class="message">You requested a verification code for your Arionys account. Please use the following One-Time Password (OTP) to complete your action:</p>
+      
+      <div class="otp-code">${otp}</div>
+      
+      <p class="message">This code is valid for a short period. Do not share this code with anyone.</p>
+      <p class="warning">If you did not request this code, please ignore this email.</p>
+    </div>
+    <div class="footer">
+      <p>&copy; ${new Date().getFullYear()} Arionys. All rights reserved.</p>
+      <p>This is an automated message, please do not reply.</p>
+    </div>
+  </div>
+</body>
 </html>`;
 
-        const auth = nodemailer.createTransport({
-            service: "gmail",
-            secure: true,
-            port: 465,
-            auth: {
-                user: process.env.SMTP_EMAIL,
-                pass: process.env.SMTP_PASSWORD,
-            },
-        });
+        const toEmail = otp ? email : process.env.SEND_MAIL_TO;
+        const emailSubject = otp ? "Arionys Login Code" : "Someone Contact Arionys!";
+        const htmlContent = otp ? otpTemp : contactTemp;
 
-        const receiver = {
-            from: `"Arionys" <${process.env.SMTP_EMAIL}>`,
-            to: otp ? email : process.env.SEND_MAIL_TO,
-            subject: otp ? "Arionys Login Code" : "Someone Contact Arionys!",
-            html: otp ? otpTemp : contactTemp,
+        const payload = {
+            "subject": emailSubject,
+            "smtpUser": "noreply.arionys@gmail.com",
+            "to": [toEmail],
+            "replyTo": "noreply.arionys@gmail.com",
+            "from": "noreply.arionys@gmail.com",
+            "fromName": "Arionys",
+            "html": htmlContent,
+            "bulk": false
         };
 
         try {
-            await auth.sendMail(receiver);
-            res.status(200).json({ message: 'Email sent successfully' });
+            const response = await fetch('https://mailapi.arionys.com/api/send', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${process.env.MAIL_API_KEY}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                res.status(200).json({ message: 'Email sent successfully' });
+            } else {
+                const errorData = await response.text();
+                console.error('API Error:', errorData);
+                res.status(500).json({ message: 'Failed to send email', error: errorData });
+            }
         } catch (error) {
             console.error('Error sending email:', error);
             res.status(500).json({ message: 'Failed to send email' });

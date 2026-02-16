@@ -36,6 +36,15 @@ export default async function userlogin(req, res) {
             }));
         }
 
+        // Check if account is pending approval
+        if (user.status === 'pending') {
+            return res.status(403).json({ 
+                success: false, 
+                status: 403, 
+                message: 'Account is pending approval. Please wait for admin confirmation.' 
+            });
+        }
+
         // console.log(user.password)
 
         const isPasswordValid = await bcrypt.compare(password, user.password);

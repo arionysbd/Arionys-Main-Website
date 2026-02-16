@@ -12,7 +12,8 @@ const UserSchema = new Schema({
     facebook: { type: String,  },
     linkedin: { type: String,  },
     github: { type: String,  },
-    image: { type: String,  }
+    image: { type: String,  },
+    status: { type: String, default: 'pending' },
 }, {
     timestamps: true // This option will automatically manage createdAt and updatedAt fields
 });

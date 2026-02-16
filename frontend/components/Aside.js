@@ -5,6 +5,7 @@ import { IoHome } from "react-icons/io5";
 import { BsPostcard } from "react-icons/bs";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
+import { BiCode } from "react-icons/bi";
 import { MdOutlinePending } from "react-icons/md";
 import { React, useState, useEffect } from 'react'
 
@@ -76,6 +77,22 @@ export default function Aside() {
                         onClick={() => handleLinkClick('/dashboard/setting')}>
                         <IoSettingsOutline />
                         <span>Settings</span>
+                    </li>
+                </Link>
+
+                <Link href="/dashboard/api">
+                    <li className={activeLink === '/dashboard/api' ? 'navactive' : ''}
+                        onClick={() => handleLinkClick('/dashboard/api')}>
+                        <IoSettingsOutline />
+                        <span>API</span>
+                    </li>
+                </Link>
+
+                <Link href="/dashboard/playground">
+                    <li className={activeLink === '/dashboard/playground' ? 'navactive' : ''}
+                        onClick={() => handleLinkClick('/dashboard/playground')}>
+                        <BiCode />
+                        <span>Playground</span>
                     </li>
                 </Link>
 

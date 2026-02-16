@@ -101,7 +101,7 @@ const AboutSection = () => {
                                         </path>
                                     </svg>
                                 </Link>
-                                <Link className="text-gray-700 dark:text-gray-50 hover:text-orange-600" aria-label="Visit TrendyMinds Instagram" href="https://www.instagram.com//"
+                                <Link className="text-gray-700 dark:text-gray-50 hover:text-orange-600" aria-label="Visit TrendyMinds Instagram" href="https://www.instagram.com/"
                                     target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="h-6">
                                         <path fill="currentColor"

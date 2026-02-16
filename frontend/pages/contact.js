@@ -16,6 +16,12 @@ const contact = () => {
     const [phone, setPhone] = useState("")
     const [message, setMessage] = useState("")
 
+    React.useEffect(() => {
+        if (router.query.subject) {
+            setSubject(router.query.subject);
+        }
+    }, [router.query.subject]);
+
     async function sendEmail(ev) {
         ev.preventDefault();
         const data = { message, subject, name, phone, email };

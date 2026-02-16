@@ -1,7 +1,7 @@
 import { BsPostcard } from "react-icons/bs";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { FaEdit } from "react-icons/fa";
-import useFetchData from "@/hooks/useFetchData";
+import axios from "axios";
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -11,12 +11,12 @@ import { jwtDecode } from "jwt-decode";
 import Head from "next/head";
 import toast from "react-hot-toast";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input, Textarea, Select, SelectItem } from "@nextui-org/react";
-import axios from "axios";
 import * as XLSX from 'xlsx';
 import Datepicker from "react-tailwindcss-datepicker";
 import Swal from "sweetalert2";
 import { formatISO, format } from 'date-fns';
 import Script from "next/script";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function userDiary() {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -27,8 +27,8 @@ export default function userDiary() {
     const [user, setUser] = useState({ value: null });
     const [author, setAuthor] = useState('');
     const [username, setUsername] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
-    const [perPage, setPerPage] = useState(5); // Default number of blogs per page
+    const [offset, setOffset] = useState(0);
+    const [limit, setLimit] = useState(20);
     const [searchQuery, setSearchQuery] = useState('');
 
     const [option, setOption] = useState('');
@@ -104,8 +104,10 @@ export default function userDiary() {
     }
 
     // Fetch all blogs on component load
-    const { alldata, loading } = useFetchData(username ? `/api/diary?userid=${author}` : {});
-    let allNotes = alldata;
+    const [loading, setLoading] = useState(false);
+    const [allNotes, setAllNotes] = useState([]);
+    const [hasMore, setHasMore] = useState(true);
+    const [loadMoreRefElem, setLoadMoreRefElem] = useState(null);
 
 
     function closeReset() {
@@ -250,23 +252,39 @@ export default function userDiary() {
 
     // Calculate total number of filtered blogs
     const totalFilteredBlogs = filteredBlogs.length;
-    // Calculate the currently displayed blogs with pagination logic
-    const indexOfFirstBlog = (currentPage - 1) * perPage;
-    const indexOfLastBlog = currentPage * perPage;
-    const currentBlogs = filteredBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
+    const currentBlogs = filteredBlogs;
 
     // Pagination page numbers calculation
-    const pageNumbers = useMemo(() => {
-        const totalPages = Math.ceil(totalFilteredBlogs / perPage);
-        return Array.from({ length: totalPages }, (_, i) => i + 1);
-    }, [totalFilteredBlogs, perPage]);
+    const pageNumbers = useMemo(() => [], []);
 
     // Paginate function to change page
-    const paginate = (pageNumber) => {
-        if (pageNumber > 0 && pageNumber <= pageNumbers.length) {
-            setCurrentPage(pageNumber);
-        }
-    };
+    const paginate = () => {};
+
+    useEffect(() => {
+        const fetchChunk = async () => {
+            if (!author) return;
+            setLoading(true);
+            const res = await axios.get(`/api/diary`, { params: { userid: author, offset, limit } });
+            const data = res.data || [];
+            setAllNotes(prev => [...prev, ...data]);
+            setHasMore(data.length === limit);
+            setLoading(false);
+        };
+        fetchChunk();
+    }, [author, offset, limit]);
+
+    useEffect(() => {
+        if (!loadMoreRefElem) return;
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && hasMore && !loading) {
+                    setOffset(prev => prev + limit);
+                }
+            });
+        }, { rootMargin: '400px 0px 400px 0px', threshold: 0.01 });
+        io.observe(loadMoreRefElem);
+        return () => io.disconnect();
+    }, [loadMoreRefElem, hasMore, loading, limit]);
 
     const filterExportData = (data) => {
         return data.map(item => {
@@ -680,18 +698,18 @@ export default function userDiary() {
                         </select>
 
                         <select
-                            value={perPage}
+                            value={limit}
                             onChange={(e) => {
-                                setPerPage(Number(e.target.value)); // Update perPage based on dropdown selection
-                                setCurrentPage(1); // Reset to first page when perPage changes
+                                const v = Number(e.target.value);
+                                setLimit(v);
+                                setOffset(0);
+                                setAllNotes([]);
                             }}
                             className="w-full md:w-auto block p-4 border-gray-300 rounded-md shadow-sm dark:border-gray-600 bg-slate-100 dark:bg-[#2d3748] dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#6466f1] focus:border-transparent sm:flex-grow"
                         >
-                            <option value={5}>5</option>
-                            <option value={10}>10</option>
-                            <option value={15}>15</option>
                             <option value={20}>20</option>
                             <option value={50}>50</option>
+                            <option value={100}>100</option>
                         </select>
 
                         <select
@@ -756,10 +774,13 @@ export default function userDiary() {
                                                 </td>
                                             </tr>
                                         ) : (
-                                            [...currentBlogs] // Clone the array to avoid mutating the original
-                                                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) // Sort by createdAt in descending order
+                                            [...currentBlogs]
+                                                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
                                                 .map((blog, index) => (
-                                                    <tr
+                                                    <motion.tr
+                                                        initial={{ opacity: 0, y: 8 }}
+                                                        animate={{ opacity: 1, y: 0 }}
+                                                        transition={{ duration: 0.25 }}
                                                         key={blog._id}
                                                         className="border-b dark:bg-[#3a4964] dark:text-gray-100 dark:border-gray-200"
                                                     >
@@ -834,7 +855,7 @@ export default function userDiary() {
                                                                 </button>
                                                             </div>
                                                         </td>
-                                                    </tr>
+                                                    </motion.tr>
                                                 ))
                                         )}
                                     </>
@@ -857,33 +878,18 @@ export default function userDiary() {
                         </table>
                     </div>
 
-                    {totalFilteredBlogs > 0 && (
-                        <div className="blogpagination mt-4 flex flex-wrap justify-center gap-2">
-                            <button
-                                onClick={() => paginate(currentPage - 1)}
-                                disabled={currentPage === 1}
-                                className="px-4 py-2 border rounded-md disabled:opacity-50 dark:bg-gray-800 dark:text-gray-100"
-                            >
-                                Previous
-                            </button>
-                            {pageNumbers.map(number => (
-                                <button
-                                    key={number}
-                                    onClick={() => paginate(number)}
-                                    className={`px-4 py-2 border rounded-md ${currentPage === number ? '!bg-[#8a8dd8] dark:!bg-gray-700' : 'dark:bg-[#1c2532] bg-gray-400'} dark:text-gray-100 `}
-                                >
-                                    {number}
-                                </button>
-                            ))}
-                            <button
-                                onClick={() => paginate(currentPage + 1)}
-                                disabled={currentPage === pageNumbers.length}
-                                className="px-4 py-2 border rounded-md disabled:opacity-50 dark:bg-gray-800 dark:text-gray-100"
-                            >
-                                Next
-                            </button>
-                        </div>
-                    )}
+                    <div ref={setLoadMoreRefElem} className="mt-8 flex justify-center items-center">
+                        {loading ? (
+                            <div className="flex items-center gap-3 text-indigo-400">
+                                <div className="h-6 w-6 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+                                <span>Loading more...</span>
+                            </div>
+                        ) : hasMore ? (
+                            <button onClick={() => setOffset(prev => prev + limit)} className="px-4 py-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow hover:opacity-90">Load more</button>
+                        ) : (
+                            <span className="text-gray-400">No more data</span>
+                        )}
+                    </div>
 
                 </div>
             </div >

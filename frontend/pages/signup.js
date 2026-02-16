@@ -46,7 +46,7 @@ const signup = () => {
     }, [])
 
 
-    const SendOTP = (ev) => {
+    const SendOTP = async (ev) => {
         // ev.preventDefault();
         const { otp, expires } = TOTP.generate("JBSWY3DPEHPK3PXP")
         // console.log(otp)
@@ -54,29 +54,40 @@ const signup = () => {
 
         const data = { otp, email };
         try {
-
-            axios.post('/api/sendEmail', data)
-            // console.log(data)
+            await axios.post('/api/sendEmail', data)
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: "Mail sent successfully"
+            });
         } catch {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "error",
+                title: "Failed to send email"
+            });
             return
         }
-
-
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-            }
-        });
-        Toast.fire({
-            icon: "success",
-            title: "Mail Sent successfully"
-        });
         // setRedirect(true);
 
     };
@@ -104,7 +115,7 @@ const signup = () => {
             });
             Toast.fire({
                 icon: "success",
-                title: "Account successfully created"
+                title: "Account created! Waiting for admin approval."
             });
 
         } catch {
