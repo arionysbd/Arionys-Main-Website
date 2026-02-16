@@ -28,9 +28,9 @@ export default function Footer() {
                 <div className="q_links" data-aos="fade-left">
                     <h3>Social Media</h3>
                     <ul>
-                        <li><Link href='https://github.com/' target="_blank">Github</Link></li>
-                        <li><Link href='https://x.com/r' target="_blank">Twitter</Link></li>
-                        <li><Link href='https://www.instagram.com/' target="_blank">Instagram</Link></li>
+                        <li><Link href='https://github.com/arionysbd' target="_blank">Github</Link></li>
+                        <li><Link href='https://x.com/arionys_bd' target="_blank">Twitter</Link></li>
+                        <li><Link href='https://www.instagram.com/arionys_bd?igsh=MWYydDV4cXBuOXZlMg==' target="_blank">Instagram</Link></li>
                         <li><Link href='https://www.facebook.com/arionysbd' target="_blank">Facebook</Link></li>
                     </ul>
                 </div>

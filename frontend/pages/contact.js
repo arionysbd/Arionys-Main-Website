@@ -70,7 +70,7 @@ const contact = () => {
                 <meta name="twitter:title" content="Contact Us | Arionys" />
                 <meta name="twitter:description" content="Get in touch with Arionys to learn more about our robotics and mechatronics initiatives. We are ready to assist you with your inquiries." />
                 <meta name="twitter:image" content="/img/contact.png" />
-                <meta name="twitter:site" content="@yourtwitterhandle" />
+                <meta name="twitter:site" content="@arionys_bd" />
             </Head>
 
             <div className="min-h-screen flex items-center justify-center bg-white dark:bg-[#2d3748] py-12 px-4 sm:px-6 lg:px-8">
@@ -118,13 +118,13 @@ const contact = () => {
     </svg>
   </a>
 
-  <a href="https://x.com/arionys" target="_blank" rel="noopener" className="text-blue-600 hover:text-blue-800 dark:text-blue-300 dark:hover:text-blue-400">
+  <a href="https://x.com/arionys_bd" target="_blank" rel="noopener" className="text-blue-600 hover:text-blue-800 dark:text-blue-300 dark:hover:text-blue-400">
     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
       <path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.724-.951.555-2.005.959-3.127 1.184-.897-.959-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-.422.722-.666 1.561-.666 2.475 0 1.708.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.229-.616v.062c0 2.385 1.693 4.374 4.188 4.827-.693.188-1.452.232-2.224.084.627 1.956 2.444 3.377 4.6 3.417-2.07 1.623-4.678 2.348-7.29 2.034 2.179 1.397 4.768 2.213 7.557 2.213 9.142 0 14.307-7.721 13.995-14.646.962-.689 1.797-1.56 2.457-2.549z" />
     </svg>
   </a>
 
-  <a href="https://instagram.com/arionys" target="_blank" rel="noopener" className="text-pink-500 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-500">
+  <a href="https://www.instagram.com/arionys_bd?igsh=MWYydDV4cXBuOXZlMg==" target="_blank" rel="noopener" className="text-pink-500 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-500">
     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
       <path d="M7.5 2A5.5 5.5 0 002 7.5v9A5.5 5.5 0 007.5 22h9a5.5 5.5 0 005.5-5.5v-9A5.5 5.5 0 0016.5 2h-9zm0 2h9A3.5 3.5 0 0120 7.5v9a3.5 3.5 0 01-3.5 3.5h-9A3.5 3.5 0 014 16.5v-9A3.5 3.5 0 017.5 4zm4.5 3a5.5 5.5 0 100 11 5.5 5.5 0 000-11zm0 2a3.5 3.5 0 110 7 3.5 3.5 0 010-7zm5.25-.75a.75.75 0 100 1.5.75.75 0 000-1.5z" />
     </svg>
@@ -137,7 +137,7 @@ const contact = () => {
 </a>
 
 
-  <a href="https://github.com/arionys" target="_blank" rel="noopener" className="text-gray-800 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100">
+  <a href="https://github.com/arionysbd" target="_blank" rel="noopener" className="text-gray-800 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100">
     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
       <path fillRule="evenodd" d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.111.793-.261.793-.577 0-.285-.01-1.04-.015-2.042-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.304.762-1.604-2.665-.305-5.466-1.332-5.466-5.932 0-1.31.467-2.382 1.235-3.222-.124-.304-.536-1.528.117-3.183 0 0 1.008-.322 3.3 1.23a11.49 11.49 0 013.003-.403c1.018.005 2.044.137 3.003.403 2.29-1.552 3.297-1.23 3.297-1.23.655 1.655.243 2.879.12 3.183.77.84 1.233 1.912 1.233 3.222 0 4.61-2.804 5.624-5.475 5.921.43.37.814 1.102.814 2.222 0 1.604-.015 2.896-.015 3.286 0 .319.192.694.8.576C20.565 21.796 24 17.298 24 12c0-6.627-5.373-12-12-12z" clipRule="evenodd" />
     </svg>
