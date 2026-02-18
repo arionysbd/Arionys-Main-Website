@@ -40,7 +40,7 @@ const RightPortfolioInfo = () => {
                     <Link href={"https://x.com/arionys_bd"} target="_blank"><FaTwitter /></Link>
                 </div>
                 <div className="st_icon" data-aos="fade-up">
-                    <Link href={"https://www.linkedin.com/company/"} target="_blank"> <FaLinkedinIn /></Link>
+                    <Link href={"https://www.linkedin.com/company/arionysbd/"} target="_blank"> <FaLinkedinIn /></Link>
                 </div>
             </div>
         </div>

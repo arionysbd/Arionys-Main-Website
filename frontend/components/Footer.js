@@ -7,7 +7,6 @@ export default function Footer() {
                 <div className="footer_logo" data-aos="fade-right">
                     <h2>Arionys</h2>
                     <h4>&copy; 2025 ALL Rights Reserved.</h4>
-                    <h3>Developed By <Link href="https://linkedin.com/in/06nurahmed" target="_blank"><span>@Nur Ahmad</span></Link></h3>
                 </div>
                 <div className="q_links" data-aos="fade-up">
                     <h3>Quick Links</h3>
@@ -29,6 +28,7 @@ export default function Footer() {
                     <h3>Social Media</h3>
                     <ul>
                         <li><Link href='https://github.com/arionysbd' target="_blank">Github</Link></li>
+                        <li><Link href='https://www.linkedin.com/company/arionysbd/' target="_blank">LinkedIn</Link></li>
                         <li><Link href='https://x.com/arionys_bd' target="_blank">Twitter</Link></li>
                         <li><Link href='https://www.instagram.com/arionys_bd?igsh=MWYydDV4cXBuOXZlMg==' target="_blank">Instagram</Link></li>
                         <li><Link href='https://www.facebook.com/arionysbd' target="_blank">Facebook</Link></li>

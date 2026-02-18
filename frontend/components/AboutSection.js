@@ -12,10 +12,10 @@ const structuredData = {
     "url": process.env.SITE_URL,
     "logo": `${process.env.SITE_URL}/img/Coder.png`,
     "sameAs": [
-        "https://www.linkedin.com/company/",
+        "https://www.linkedin.com/company/arionysbd/",
         "https://www.facebook.com/arionysbd",
-        "https://www.instagram.com/",
-        "https://x.com/"
+        "https://www.instagram.com/arionys_bd?igsh=MWYydDV4cXBuOXZlMg==",
+        "https://x.com/arionys_bd"
     ]
 }
 
@@ -77,7 +77,7 @@ const AboutSection = () => {
                                 Find us at
                             </h2>
                             <div className="flex justify-center items-center gap-6 my-6">
-                                <Link className="text-gray-700 dark:text-gray-50 hover:text-orange-600" aria-label="Visit TrendyMinds LinkedIn" href="https://www.linkedin.com/company/"
+                                <Link className="text-gray-700 dark:text-gray-50 hover:text-orange-600" aria-label="Visit TrendyMinds LinkedIn" href="https://www.linkedin.com/company/arionysbd/"
                                     target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="h-6">
                                         <path fill="currentColor"

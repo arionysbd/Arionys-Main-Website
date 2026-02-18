@@ -69,7 +69,6 @@ const contact = () => {
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="Contact Us | Arionys" />
                 <meta name="twitter:description" content="Get in touch with Arionys to learn more about our robotics and mechatronics initiatives. We are ready to assist you with your inquiries." />
-                <meta name="twitter:image" content="/img/contact.png" />
                 <meta name="twitter:site" content="@arionys_bd" />
             </Head>
 
@@ -102,7 +101,7 @@ const contact = () => {
 
 
 
-                      <span className="text-gray-700 dark:text-gray-200">Dhaka, Bangladesh</span>
+                      <span className="text-gray-700 dark:text-gray-200">Level 09, Silicon Tower, Rajshahi Hi-Tech Park, Rajshahi, Bangladesh</span>
                     </div>
                   </div>
                   <div className="flex space-x-4 mt-4">
@@ -112,7 +111,7 @@ const contact = () => {
     </svg>
   </a>
 
-  <a href="https://linkedin.com/company/arionys" target="_blank" rel="noopener" className="text-blue-600 hover:text-blue-800 dark:text-blue-300 dark:hover:text-blue-400">
+  <a href="https://www.linkedin.com/company/arionysbd/" target="_blank" rel="noopener" className="text-blue-600 hover:text-blue-800 dark:text-blue-300 dark:hover:text-blue-400">
     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
       <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.868-3.063-1.868 0-2.154 1.459-2.154 2.967v5.7h-3v-10h2.881v1.367h.041c.401-.761 1.381-1.563 2.841-1.563 3.039 0 3.6 2.001 3.6 4.601v5.595z" />
     </svg>
@@ -130,11 +129,7 @@ const contact = () => {
     </svg>
   </a>
 
-  <a href="https://youtube.com/@arionys" target="_blank" rel="noopener" className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-500">
-  <svg className="w-6 h-6" viewBox="0 0 576 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M549.7 124.1c-6.3-23.7-24.9-42.3-48.6-48.6C456.5 64 288 64 288 64s-168.5 0-213.1 11.5c-23.7 6.3-42.3 24.9-48.6 48.6C16 168.7 16 256 16 256s0 87.3 10.3 131.9c6.3 23.7 24.9 42.3 48.6 48.6C119.5 448 288 448 288 448s168.5 0 213.1-11.5c23.7-6.3 42.3-24.9 48.6-48.6 10.3-44.6 10.3-131.9 10.3-131.9s0-87.3-10.3-131.9zM232 334.7V177.3L345 256l-113 78.7z"/>
-  </svg>
-</a>
+ 
 
 
   <a href="https://github.com/arionysbd" target="_blank" rel="noopener" className="text-gray-800 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100">
